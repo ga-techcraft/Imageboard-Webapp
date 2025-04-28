@@ -1,6 +1,7 @@
 FROM php:8.2-fpm
 
 # PHP拡張をインストール（MySQL用など）
+RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo pdo_mysql
 
 # Composerのインストール（オプション）
