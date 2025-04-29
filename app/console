@@ -17,6 +17,7 @@ foreach ($commands as $commandClass) {
     $alias = $commandClass::getAlias();
 
     if($inputCommand === $alias){
+      try {
         if(in_array('--help',$argv)){
             fwrite(STDOUT, $commandClass::getHelp());
             exit(0);
@@ -26,6 +27,9 @@ foreach ($commands as $commandClass) {
             $result = $command->execute();
             exit($result);
         }
+      } catch (Exception $e) {
+        fwrite(STDERR, $e->getMessage());
+      }
     }
 }
 
