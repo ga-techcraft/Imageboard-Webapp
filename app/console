@@ -6,7 +6,6 @@ spl_autoload_register(function($class) {
     if (file_exists(stream_resolve_include_path($file))) include($file);
 });
 
-
 $commands = include "Commands/registry.php";
 
 // 第2引数は実行するコマンド

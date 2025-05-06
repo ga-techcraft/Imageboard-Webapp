@@ -27,6 +27,8 @@ class CodeGeneration extends AbstractCommand{
     // コマンドコードの生成の場合
     if ($type === 'command') {
       $this->makeCommandFile($name);
+    } else if ($type === 'migration') {
+      $this->makeMigrationFile($name);
     }
 
     return 0;
@@ -49,5 +51,19 @@ class CodeGeneration extends AbstractCommand{
     CODE;
     
     file_put_contents(__DIR__ . "/../registry.php", $code);
+  }
+
+  public function makeMigrationFile($name){
+    // ファイル名作成
+    $filename = sprintf("%s_%s_%s.php", date('Y-m-d'), time(), $name);
+
+    // コンテンツを取得
+    $content = include(__DIR__ . '/Templete/Migration.php');
+
+    // パスを取得
+    $path = __DIR__ . '/../../Database/Migrations/' . $filename;
+
+    // そのパスにコンテンツを入れる
+    file_put_contents($path, $content);
   }
 }
