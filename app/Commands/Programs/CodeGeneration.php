@@ -29,6 +29,8 @@ class CodeGeneration extends AbstractCommand{
       $this->makeCommandFile($name);
     } else if ($type === 'migration') {
       $this->makeMigrationFile($name);
+    } else if ($type === 'seed') {
+      $this->makeSeedFile($name);
     }
 
     return 0;
@@ -64,6 +66,17 @@ class CodeGeneration extends AbstractCommand{
     $path = __DIR__ . '/../../Database/Migrations/' . $filename;
 
     // そのパスにコンテンツを入れる
+    file_put_contents($path, $content);
+  }
+
+  public function makeSeedFile($name){
+    // コンテンツを取得
+    $content = include(__DIR__ . '/Templete/Seed.php');
+
+    // パスを取得
+    $path = __DIR__ . '/../../Database/Seeds/' . $name . '.php';
+
+    // そのパスにデータを入れる
     file_put_contents($path, $content);
   }
 }
