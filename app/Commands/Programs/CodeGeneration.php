@@ -12,9 +12,9 @@ class CodeGeneration extends AbstractCommand{
 
   public static function getArguments(): array{
     return [
-      new Argument('name')
+      (new Argument('name'))
         ->description('生成するコードの名前')
-        ->required(true)
+        ->required(true),
     ];
   }
 
